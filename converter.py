@@ -3,11 +3,9 @@ import requests
 API_KEY = 'fca_live_e186I1zpfQRcxn9NsZGyM3Q0jRmemCd4bDkC9j4C'
 BASE_URL = f"https://api.freecurrencyapi.com/v1/latest?apikey={API_KEY}"
 
-CURRENCIES = ["USD","CAD","EUR","AUD","BRL"]
 
-def convert_currency(base):
-    currencies = ",".join(CURRENCIES)
-    url = f"{BASE_URL}&base_currency={base}&currencies={currencies}"
+def convert_currency(base,currency):
+    url = f"{BASE_URL}&base_currency={base}&currencies={currency}"
     try:
         response = requests.get(url)
         data = response.json()
@@ -23,7 +21,7 @@ while True:
     qttBase = int(input("Type the quantity for conversion: "))
     currency = input("In witch currency? ").upper()
 
-    data = convert_currency(base)
+    data = convert_currency(base,currency)
 
     if not data:
         continue
